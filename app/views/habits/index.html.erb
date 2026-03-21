@@ -1,0 +1,11 @@
+<%= link_to "習慣を登録する", new_habit_path, method: :new  %>
+<h1><%= current_user.email %>の習慣</h1>
+<% if @habits.present? %>
+    <% @habits.each do |habit| %>
+        <h2><%= link_to habit.title , habit_path(habit) %></h2>
+        <p> <%= habit.detail %></p>
+        <br>
+    <% end %>
+<% else %>
+    <h2>登録した習慣が存在しません</h2>
+<%end%>

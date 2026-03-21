@@ -1,0 +1,8 @@
+<h1>編集する習慣</h1>
+<%= form_with model: @habit do |form| %>
+    <p>タイトル</p>
+    <%= form.text_field :title, value: @habit.title %>
+    <p>詳細</p>
+    <%= form.text_field :detail, value: @habit.detail %>
+    <%= form.submit("送信") %>
+<% end %>

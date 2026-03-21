@@ -1,0 +1,5 @@
+<h2><%= @habit.title %></h2>
+<h3><%= @habit.detail %></h3>
+
+<%= link_to "編集", edit_habit_path(@habit) %>
+<%= link_to "削除", habit_path(@habit), data: { turbo_method: :delete } %>
