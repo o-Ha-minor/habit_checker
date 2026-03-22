@@ -5,12 +5,12 @@ class HabitsController < ApplicationController
       @habits = @current_user.habits
     else
       redirect_to new_user_session_path, alert: "ログインしてください"
-
     end
   end
 
   def show
     @habit = Habit.find(params[:id])
+    @habit_logs = @habit.habit_log
   end
 
   def new

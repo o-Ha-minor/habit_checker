@@ -1,5 +1,11 @@
 <h2><%= @habit.title %></h2>
 <h3><%= @habit.detail %></h3>
+<h3>"達成記録"</h3>
+<%= @habit_logs.each do |log| %>
+    <p><%= log.date %></p>
+    <p><%= log.memo %></p>
+<% end %>
 
-<%= link_to "編集", edit_habit_path(@habit) %>
-<%= link_to "削除", habit_path(@habit), data: { turbo_method: :delete } %>
+<p><%= link_to "達成を記録する", new_habit_log_path(habit_id: @habit.id) %></p>
+<p><%= link_to "編集", edit_habit_path(@habit) %></p>
+<p><%= link_to "削除", habit_path(@habit), data: { turbo_method: :delete } %></p>

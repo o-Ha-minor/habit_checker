@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_11_071155) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_22_090657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "habit_logs", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.date "date", null: false
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_logs_on_habit_id"
+  end
 
   create_table "habits", force: :cascade do |t|
     t.string "title"
@@ -35,5 +44,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_11_071155) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "habit_logs", "habits"
   add_foreign_key "habits", "users"
 end

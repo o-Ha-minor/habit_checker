@@ -1,0 +1,10 @@
+<h2>習慣の記録</h2>
+<%= form_with model: @habit_log do |form|%>
+   <p>達成日時</p>
+   <%= form.date_field :date %>
+   <p>メモ</p>
+   <%= form.text_field :memo %>
+   <%= form.hidden_field :habit_id %>
+   <%= form.submit("送信") %>
+
+<% end %>
