@@ -65,3 +65,5 @@ end
 gem "pry-rails"
 
 gem "devise"
+
+gem "tailwindcss-rails", "~> 4.4"

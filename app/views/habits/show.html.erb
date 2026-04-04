@@ -1,11 +1,14 @@
-<h2><%= @habit.title %></h2>
-<h3><%= @habit.detail %></h3>
-<h3>"達成記録"</h3>
-<%= @habit_logs.each do |log| %>
-    <p><%= log.date %></p>
-    <p><%= log.memo %></p>
-<% end %>
-
-<p><%= link_to "達成を記録する", new_habit_log_path(habit_id: @habit.id) %></p>
-<p><%= link_to "編集", edit_habit_path(@habit) %></p>
-<p><%= link_to "削除", habit_path(@habit), data: { turbo_method: :delete } %></p>
+<div class="container px-2 py-2">
+    <h2 class="text-2xl"><%= @habit.title %></h2>
+    <h3 class="text-xl"><%= @habit.detail %></h3>
+    <h3 class="py-3">~達成記録~</h3>
+        <% @habit_logs.each do |log| %>
+            <div class="bg-amber-200 rounded-2xl px-2 py-2 my-1">
+                <p><%= log.date %></p>
+                <p><%= log.memo %></p>
+            </div>
+        <% end %>
+    <p><%= primary_link_to("達成を記録する", new_habit_log_path(habit_id: @habit.id)) %></p>
+    <p><%= primary_link_to( "編集", edit_habit_path(@habit)) %></p>
+    <p><%= primary_link_to( "削除", habit_path(@habit), data: { turbo_method: :delete }) %></p>
+</div>

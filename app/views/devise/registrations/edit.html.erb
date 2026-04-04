@@ -1,42 +1,43 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="text-2xl"><%= current_user.email %>の情報を編集</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+    <p><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"rounded-md border-2" %></p>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div>現在、以下の確認を待っています: <%= resource.unconfirmed_email %></div>
   <% end %>
 
   <div class="field">
-    <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
+    <p><%= f.label :password %> <i>(変更しない場合は空白のままにしてください)</i></p>
+    <p><%= f.password_field :password, autocomplete: "new-password" ,class:"rounded-md border-2"%></p>
     <% if @minimum_password_length %>
-      <p><em><%= @minimum_password_length %> characters minimum</em></p>
+      <p><em><%= @minimum_password_length %>文字以上必要です</em></p>
     <% end %>
   </div>
 
   <div class="field">
     <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
+    <p><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"rounded-md border-2"%></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
-    <p><%= f.password_field :current_password, autocomplete: "current-password" %></p>
+    <p><%= f.label :current_password %> <i>(現在のパスワード)</i></p>
+    <p><%= f.password_field :current_password, autocomplete: "current-password", class:"rounded-md border-2" %></p>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= primary_submit(f,"更新") %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<div class="inline-block my-1 px-3 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-800 cursor-pointer transition-all duration-300"> 
+  <%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "本当に削除しますか？", turbo_confirm: "本当に削除しますか？" }, method: :delete %>
+</div>
+<br>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+<%= primary_link_to("戻る", :back) %>
