@@ -3,7 +3,7 @@
     <h1 class="text-4xl px-2 py-3"><%= current_user.email %>さんの習慣</h1>
     <% if @habits.present? %>
         <% @habits.each do |habit| %>
-            <div class="container flex flex-col px-8 py-5 bg-amber-100 rounded-lg border">
+            <div class="container flex flex-col px-5 py-3 my-2 bg-amber-100 rounded-lg border">
                 <h2 class="underline current text-2xl text-blue-700 py-1 hover:text-blue-900 transition-all duration-300"><%= link_to habit.title , habit_path(habit) %></h2>
                 <p> <%= habit.detail %></p>
             </div>

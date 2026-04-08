@@ -1,49 +1,44 @@
 class HabitsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    if current_user
-      @current_user = current_user
-      @habits = @current_user.habits
-    else
-      redirect_to new_user_session_path, alert: "ログインしてください"
-    end
+    @habits = current_user.habits
   end
 
   def show
-    @habit = Habit.find(params[:id])
-    @habit_logs = @habit.habit_log
+    @habit = current_user.habits.find(params[:id])
+    @habit_logs = @habit.habit_logs
   end
 
   def new
-    @habit = Habit.new
+    @habit = current_user.habits.new
   end
 
   def create
-    @current_user = current_user
-    @habit = Habit.new(habit_params)
-    @habit.user_id = @current_user.id
+    @habit = current_user.habits.new(habit_params)
     if @habit.save
       redirect_to root_path, notice: "習慣を登録しました"
     else
-      redirect_to root_path
+      render :new, notice: "習慣の登録に失敗しました"
     end
   end
 
   def edit
-    @current_user = current_user
-    @habit = Habit.find(params[:id])
+    @habit = current_user.habits.find(params[:id])
   end
 
   def update
-    @current_user = current_user
-    @habit = Habit.find(params[:id])
-    @habit.update(habit_params)
-    redirect_to root_path notice: "習慣を編集しました"
+    @habit = current_user.habits.find(params[:id])
+    if @habit.update(habit_params)
+      redirect_to root_path, notice: "習慣を編集しました"
+    else
+      render :edit, notice: "習慣の編集に失敗しました"
+    end
   end
 
   def destroy
-    @habit = Habit.find(params[:id])
+    @habit = current_user.habits.find(params[:id])
     @habit.destroy
-    redirect_to root_path notice: "習慣を削除しました"
+    redirect_to root_path, notice: "習慣を削除しました"
   end
 
   private
