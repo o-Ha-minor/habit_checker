@@ -39,11 +39,14 @@
       </div>
     </header>
     <main class="container mx-auto px-3 py-5">
+      <% if @habit_log&.errors&.any? %>
+        <% @habit_log.errors.full_messages.each do |error_message| %>
+          <p class="mb-3 rounded bg-red-100 px-3 py-2"><%= error_message %></p>
+        <% end %>
+      <% end %>
       <% flash.each do |type, message| %>
         <p class="mb-3 rounded bg-slate-100 px-3 py-2"><%= message %></p>
       <% end %>
-
-
     </main>
     <%= yield %>
   </body>

@@ -2,7 +2,7 @@
 <div class="px-3 py-3">
    <%= form_with model: @habit_log do |form|%>
       <p>達成日時</p>
-      <%= form.date_field :date ,class:"rounded-md border-2"%>
+      <%= form.date_field :date ,max: Date.today, class:"rounded-md border-2"%>
       <p>メモ</p>
       <%= form.text_field :memo ,class:"py-5 rounded-md border-2"%>
       <%= form.hidden_field :habit_id %>
